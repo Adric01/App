@@ -104,7 +104,7 @@ const deletarMetas = async () => {
         instructions: false
     })
 
-    if (metasDesmarcadas.length == 0){
+    if (itensADeletar.length == 0){
         mensagem = 'Nehum item selecionado para deletar'
         return
     }
