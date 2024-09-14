@@ -33,7 +33,10 @@ const cadastrarMeta = async () => {
 }   
 
 const listarMeta = async () => {
-
+    if(metas.length == 0){
+        mensagem = 'Não existem metas!'
+        return
+    }
 
     const respostas = await checkbox ({
         message: "Use as setas para mudar entre as metas, espaço para marcar ou desmarcar e o enter para finalizar essa etapa",
@@ -62,12 +65,17 @@ const listarMeta = async () => {
 }
 
 const metasRealizadas = async () => {
+    if(metas.length == 0){
+        mensagem = 'Não existem metas!'
+        return
+    }
+
     const realizadas = metas.filter ((meta) =>{
         return meta.checked
     })
 
     if (realizadas.length == 0){
-        console.log ("Você não possui nenhuma meta realizada")
+        mensagem = 'Você não possui nenhuma meta realizada'
         return
     }
 
@@ -75,18 +83,23 @@ const metasRealizadas = async () => {
         message: "Metas realizadas:" + realizadas.length,
         choices: [...realizadas]
     })
-
 }
 
 const metasAbertas = async () => {
+    if(metas.length == 0){
+        mensagem = 'Não existem metas!'
+        return
+    }
+
     const abertas = metas.filter((meta) => {
-        return !meta.checked
+        return  meta.checked != true
     })
 
     if(abertas.length == 0){
         mensagem = 'Nenhuma meta está em aberto'
         return
     }
+    
     await select({
         message: "Metas Abertas:" + abertas.length,
         choices: [...abertas]
@@ -94,6 +107,11 @@ const metasAbertas = async () => {
 }
 
 const deletarMetas = async () => {
+    if(metas.length == 0){
+        mensagem = 'Não existem metas!'
+        return
+    }
+
     const metasDesmarcadas = metas.map((meta) =>{
         return {value: meta.value, checked: false}
     })
@@ -178,7 +196,7 @@ const start = async() => {
              await deletarMetas()
                 break
             case "sair":
-             console.log("até a próxima !")
+             console.log("Até a próxima !")
                 return
         }
 
