@@ -1,3 +1,14 @@
 [
-  {}
+  {
+    "value": "correr",
+    "checked": false
+  },
+  {
+    "value": "gritar",
+    "checked": false
+  },
+  {
+    "value": "cantar",
+    "checked": true
+  }
 ]

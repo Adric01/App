@@ -37,7 +37,8 @@ const listarMeta = async () => {
 
     const respostas = await checkbox ({
         message: "Use as setas para mudar entre as metas, espaço para marcar ou desmarcar e o enter para finalizar essa etapa",
-        choices: [...metas]
+        choices: [...metas],
+        instructions: false
     })
 
     metas.forEach((m) => {
@@ -99,7 +100,8 @@ const deletarMetas = async () => {
 
     const itensADeletar = await checkbox({
         message: "Selecione os itens para deletar",
-        choices: [...metasDesmarcadas ]
+        choices: [...metasDesmarcadas ],
+        instructions: false
     })
 
     if (metasDesmarcadas.length == 0){
@@ -124,8 +126,7 @@ const mostrarMensagem = () => {
     }
 }
 
-
-const start = async() => {
+const start = async() => { 
     await carregarMetas()
 
     while (true){
