@@ -1,9 +1,22 @@
-const { select, input, checkbox } = require('@inquirer/prompts')
+const { select, input, checkbox } = require('@inquirer/prompts');
+const { stringify } = require('querystring');
+const { isNull } = require('util');
+const fs = require("fs").promises
 
 let metas = []
 let mensagem = "Seja Bem Vindo";
 
+const carregarMetas = async () => {
+    try{
+        const dados = await fs.readFile("metas.json", "utf-8")
+        metas = JSON.parse(dados)
+    }
+    catch(erro) {
+        metas = []
+    }
+}
 
+const salvarMetas = async () => {fs.writeFile ("metas.json", JSON.stringify(metas, null, 2))}  
 
 const cadastrarMeta = async () => {
     const meta = await input ({message: "Digite a meta:"})
@@ -113,10 +126,11 @@ const mostrarMensagem = () => {
 
 
 const start = async() => {
+    await carregarMetas()
 
     while (true){
         mostrarMensagem()
-
+        await salvarMetas()
       const opcao = await select({
          message: "Menu >",
          choices: [{
